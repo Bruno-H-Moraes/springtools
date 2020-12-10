@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+//comando que indica que é uma pagina de controle
 @Controller
 public class ControllerGeral {
 	
@@ -23,6 +24,7 @@ public class ControllerGeral {
 		return "formTema";
 	}	
 	
+	//pagina para fazer post
 	@PostMapping(value="/cadastrarTema")
 	public String form(Tema tema){			
 		repository.save(tema);

@@ -14,31 +14,31 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.JoinColumn;
 
 
-@Entity
+@Entity //expecifica que é uma entidade, uma tabela
 public class Usuario implements UserDetails,  Serializable {
     
 	//previne erros de versões sobrepostas
 	private static final long serialVersionUID = 1L;
 
 	//atributos
-	@Id
+	@Id //identificador da tabela id
 	private String login;
 	private String nomeCompleto;
 	private String senha;
 	
-	@ManyToMany
+	@ManyToMany //indica que tabela é muito pra muito
 	@JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "login"), 
 	inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "nomeRole"))
 	private List<Role> roles;
 
 	//segurança
-	@Override
+	@Override //Ele é uma forma de garantir que você está sobrescrevendo um método e não criando um novo.
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
 		return this.roles;
 
 	}
-	@Override
+	@Override //Ele é uma forma de garantir que você está sobrescrevendo um método e não criando um novo.
 	public String getPassword() {
 		return this.senha;   	}
 	@Override
@@ -48,27 +48,31 @@ public class Usuario implements UserDetails,  Serializable {
 
 	
 	@Override
+	//indica se a conta do usuario exirou
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
 		return true;
 	}
 	@Override
+	//indica se o usuario esta bloqueado ou desbloqueado
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
 		return true;
 	}
 	@Override
+	//indica se a credencial esta expirada
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
 		return true;
 	}
 	@Override
+	//indica se esta habilitado ou desabilitado
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return true;
 	}
 	
-	//getters and setters
+	//getters and setters encapsula metodos
 	public String getLogin() {
 		return login;
 	}
